@@ -1,40 +1,31 @@
 import React, {Component} from 'react';
 
 export default class Form extends Component {
-    constructor() {
-        super()
-
-        this.state = {
-            input1 : '',
-            input2 : '',
-            input3 : '',
-        }
-
-        this.handleInputChange1 = this.handleInputChange1.bind(this);
-        this.handleInputChange2 = this.handleInputChange2.bind(this);
-        this.handleInputChange3 = this.handleInputChange3.bind(this);
-        this.reset = this.reset.bind(this);
-
+    state = {
+        input1 : '',
+        input2 : '',
+        input3 : '',
     }
-    handleInputChange1(event) {
-        this.setState({ input1: event.target.value });
-    }
+
+    handleInputChange1 = (event) => {
+        this.setState({ input1 : event.target.value });
+    };
     
     handleInputChange2(event) {
-        this.setState({input2 : event.target.value });
+        this.setState({ input2 : event.target.value });
     }
 
     handleInputChange3(event) {
-        this.setState({input3 : event.target.value });
+        this.setState({ input3 : event.target.value });
     }
 
-    reset() {
+    clearInput = () => {
         this.setState({
             input1 : '',
             input2 : '',
             input3 : '',
         })
-    }
+    };
 
     render() {
         return (
@@ -44,7 +35,19 @@ export default class Form extends Component {
                     type='text'
                     value={this.state.input1} 
                     placeholder='First'
-                    onChange={(event) => this.handleInputChange1(event)} />
+                    onChange={this.handleInputChange1} />
+
+                    {/* 
+                    
+                    <input type="text" placeholder="First" />
+
+                    var input = document.querySelector('input');
+
+                    var changeHandler = this.props.onChange;
+
+                    input.addEventListener('keyup', changeHandler, false);
+                    
+                    */}
                 <input 
                     type='text'
                     value={this.state.input2}
@@ -58,7 +61,7 @@ export default class Form extends Component {
 
                 <button> Add to Inventory </button>
 
-                <button onClick={() => this.reset()}> Cancel </button>
+                <button onClick={this.clearInput}> Cancel </button>
 
                 
             </div>
