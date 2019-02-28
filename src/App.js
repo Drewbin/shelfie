@@ -6,11 +6,23 @@ import Form from './components/Form/Form';
 import Header from './components/Header/Header';
 
 class App extends Component {
+  constructor() {
+    super()
+    
+    this.state={
+      list: [
+        {name: 'prod1', price: 10, image : 'http://http.cat/100'},
+        {name: 'prod2', price: 20, image : 'http://http.cat/200'},
+      ],
+    }
+  }
+
+
   render() {
     return (
       <div className="App">
         <Header />
-        <Dashboard />
+        <Dashboard list={this.state.list} />
         <Form />
       </div>
     );

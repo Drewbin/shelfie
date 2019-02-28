@@ -17,15 +17,15 @@ export default class Form extends Component {
 
     }
     handleInputChange1(event) {
-        this.setState({ input1: event.t });
+        this.setState({ input1: event.target.value });
     }
     
-    handleInputChange2(input) {
-        this.setState({input2 : input });
+    handleInputChange2(event) {
+        this.setState({input2 : event.target.value });
     }
 
-    handleInputChange3(input) {
-        this.setState({input3 : input });
+    handleInputChange3(event) {
+        this.setState({input3 : event.target.value });
     }
 
     reset() {
@@ -44,17 +44,17 @@ export default class Form extends Component {
                     type='text'
                     value={this.state.input1} 
                     placeholder='First'
-                    onChange={(event) => this.handleInputChange1(event.target.value)} />
+                    onChange={(event) => this.handleInputChange1(event)} />
                 <input 
                     type='text'
                     value={this.state.input2}
                     placeholder='Second'
-                    onChange={(event) => this.handleInputChange2(event.target.value)}  />
+                    onChange={(event) => this.handleInputChange2(event)}  />
                 <input 
                     type='text'
                     value={this.state.input3}
                     placeholder='Third' 
-                    onChange={(event) => this.handleInputChange3(event.target.value)} />
+                    onChange={(event) => this.handleInputChange3(event)} />
 
                 <button> Add to Inventory </button>
 
