@@ -2,28 +2,28 @@ import React, {Component} from 'react';
 
 export default class Form extends Component {
     state = {
-        input1 : '',
-        input2 : '',
-        input3 : '',
+        image : '',
+        name : '',
+        price : 0,
     }
 
-    handleInputChange1 = (event) => {
-        this.setState({ input1 : event.target.value });
+    handleImageChange = (event) => {
+        this.setState({ image : event.target.value });
     };
     
-    handleInputChange2(event) {
-        this.setState({ input2 : event.target.value });
+    handleNameChange = (event) => {
+        this.setState({ name : event.target.value });
     }
 
-    handleInputChange3(event) {
-        this.setState({ input3 : event.target.value });
+    handlePriceChange = (event) => {
+        this.setState({ price : event.target.value });
     }
 
     clearInput = () => {
         this.setState({
-            input1 : '',
-            input2 : '',
-            input3 : '',
+            image : '',
+            name : '',
+            price : 0,
         })
     };
 
@@ -33,31 +33,21 @@ export default class Form extends Component {
 
                 <input 
                     type='text'
-                    value={this.state.input1} 
-                    placeholder='First'
-                    onChange={this.handleInputChange1} />
+                    value={this.state.image} 
+                    placeholder='Image URL'
+                    onChange={this.handleImageChange} />
 
-                    {/* 
-                    
-                    <input type="text" placeholder="First" />
-
-                    var input = document.querySelector('input');
-
-                    var changeHandler = this.props.onChange;
-
-                    input.addEventListener('keyup', changeHandler, false);
-                    
-                    */}
                 <input 
                     type='text'
-                    value={this.state.input2}
-                    placeholder='Second'
-                    onChange={(event) => this.handleInputChange2(event)}  />
+                    value={this.state.name}
+                    placeholder='Product Name'
+                    onChange={this.handleNameChange}  />
+
                 <input 
-                    type='text'
-                    value={this.state.input3}
-                    placeholder='Third' 
-                    onChange={(event) => this.handleInputChange3(event)} />
+                    type='number'
+                    value={this.state.price}
+                    placeholder='Price'
+                    onChange={this.handlePriceChange} />
 
                 <button> Add to Inventory </button>
 
