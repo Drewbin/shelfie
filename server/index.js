@@ -1,5 +1,5 @@
-require('dotenv').config({path : path.join(__dirname, '.env')});
 const path = require('path')
+require('dotenv').config({path : path.join(__dirname, '.env')});
 const express = require('express');
 const bodyParser = require('body-parser');
 const massive = require('massive');
@@ -20,8 +20,8 @@ massive(process.env.DB_CONNECTION_STRING, { scripts: path.join(__dirname, 'db')}
 app.use(cors());
 app.use(bodyParser.json());
 
-console.log(productsController)
-app.get('/api/product', productsController.getAll);
+app.get('/api/inventory', productsController.getAll );
+app.post('/api/inventory', productsController.create );
 
 
 

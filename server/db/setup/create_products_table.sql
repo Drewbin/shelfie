@@ -1,4 +1,4 @@
-CREATE TABLE "Products" (
+CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name TEXT,
     image TEXT,

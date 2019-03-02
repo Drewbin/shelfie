@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 export default class Form extends Component {
     state = {
-        image : '',
         name : '',
+        image : '',
         price : 0,
     }
 
-    handleImageChange = (event) => {
+    handleNameChange = (event) => {
         this.setState({ image : event.target.value });
     };
     
-    handleNameChange = (event) => {
+    handleImageChange = (event) => {
         this.setState({ name : event.target.value });
     }
 
@@ -21,11 +22,26 @@ export default class Form extends Component {
 
     clearInput = () => {
         this.setState({
-            image : '',
             name : '',
+            image : '',
             price : 0,
         })
     };
+
+    addItem = (event) => {
+        event.preventDefault();
+        
+        const { name, image, price } = this.state;
+
+        axios.post('http://localhost:8000/api/inventory', {
+            name,
+            image,
+            price,
+        }).then( () => {
+            this.props.history.push('/product')
+        })
+        this.state.clearInput();
+    }
 
     render() {
         return (
@@ -35,13 +51,13 @@ export default class Form extends Component {
                     type='text'
                     value={this.state.image} 
                     placeholder='Image URL'
-                    onChange={this.handleImageChange} />
+                    onChange={this.handleNameChange} />
 
                 <input 
                     type='text'
                     value={this.state.name}
                     placeholder='Product Name'
-                    onChange={this.handleNameChange}  />
+                    onChange={this.handleImageChange}  />
 
                 <input 
                     type='number'
@@ -49,7 +65,7 @@ export default class Form extends Component {
                     placeholder='Price'
                     onChange={this.handlePriceChange} />
 
-                <button> Add to Inventory </button>
+                <button onClick={this.addItem} > Add to Inventory </button>
 
                 <button onClick={this.clearInput}> Cancel </button>
 
