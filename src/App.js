@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Route, Switch, Redirect, HashRouter as Router } from 'react-router-dom';
 
 import Dashboard from './components/Dashboard/Dashboard';
 import Form from './components/Form/Form';
@@ -7,29 +8,21 @@ import Header from './components/Header/Header';
 import axios from 'axios';
 
 class App extends Component {
-  constructor() {
-    super()
-    
-    this.state={
-      inventoryList: [],
-    }
-  }
 
-  componentWillMount() {
-    axios.get('http://localhost:8000/api/inventory').then(res => {
-      this.setState({
-        inventoryList : res.data,
-      });
-    });
-  }
+
+
 
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Form list={this.state.inventoryList} />
-        <Dashboard list={this.state.inventoryList} />
-      </div>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path="/" exact component={Dashboard} />
+            <Route path='/add' component={Form} />
+            <Route path='/edit/:id' component={Form} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }

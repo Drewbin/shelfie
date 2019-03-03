@@ -6,22 +6,41 @@ const massive = require('massive');
 const cors = require('cors');
 
 const app = express();
-
+let dbPromise;
 const productsController = require('./controller');
 
-massive(process.env.DB_CONNECTION_STRING, { scripts: path.join(__dirname, 'db')})
-    .then(dbInstance => {
-        app.set('db', dbInstance);
-        console.log('db', dbInstance)
-    }).catch (e => {
-        console.error(e);
-    })
+
+function useDb() {
+    return function useDbMiddleware(req, res, next) {
+        if (!dbPromise) {
+            dbPromise = getDb();
+        }
+
+        dbPromise
+            .then(dbInstance => {
+                req.db = dbInstance;
+
+                next();
+            })
+            .catch(e => {
+                console.error(e);
+                res.status(500).send({ message: 'Something really bad happened' });
+                dbPromise = null;
+            });
+    };
+}
+
+function getDb() {
+    return massive(process.env.DB_CONNECTION_STRING, { scripts: path.join(__dirname, 'db')});
+}
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(useDb());
 
 app.get('/api/inventory', productsController.getAll );
-app.post('/api/inventory', productsController.create );
+app.post('/api/product', productsController.create );
+app.get('/api/product/:id', productsController.getOne);
 
 
 

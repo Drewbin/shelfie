@@ -3,10 +3,11 @@ import axios from 'axios';
 
 export default class Form extends Component {
     state = {
-        name : '',
-        image : '',
+        name : '', 
+        image : '', 
         price : 0,
     }
+
 
     handleNameChange = (event) => {
         this.setState({ image : event.target.value });
@@ -33,14 +34,14 @@ export default class Form extends Component {
         
         const { name, image, price } = this.state;
 
-        axios.post('http://localhost:8000/api/inventory', {
+        axios.post('/api/product', {
             name,
             image,
             price,
         }).then( () => {
-            this.props.history.push('/product')
+            this.props.history.push('/')
+            this.clearInput();
         })
-        this.state.clearInput();
     }
 
     render() {
@@ -48,16 +49,18 @@ export default class Form extends Component {
             <div>
 
                 <input 
+                type='text'
+                value={this.state.name}
+                placeholder='Product Name'
+                onChange={this.handleImageChange}  />
+
+
+                <input 
                     type='text'
                     value={this.state.image} 
                     placeholder='Image URL'
                     onChange={this.handleNameChange} />
 
-                <input 
-                    type='text'
-                    value={this.state.name}
-                    placeholder='Product Name'
-                    onChange={this.handleImageChange}  />
 
                 <input 
                     type='number'
@@ -70,7 +73,7 @@ export default class Form extends Component {
                 <button onClick={this.clearInput}> Cancel </button>
 
                 
-            </div>
+            </div>  
         )
     }
 }
