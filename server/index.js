@@ -39,9 +39,9 @@ app.use(bodyParser.json());
 app.use(useDb());
 
 app.get('/api/inventory', productsController.getAll );
-app.post('/api/product', productsController.create );
 app.get('/api/product/:id', productsController.getOne);
-
+app.post('/api/product', productsController.create );
+app.delete('/api/product/:id', productsController.delete);
 
 
 app.listen(3003, () => {

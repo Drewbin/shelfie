@@ -18,11 +18,19 @@ export default class Dashboard extends Component {
             inventoryList : res.data,
           });
         });
-     }
+    }
+
+    deleteProduct(id){
+        axios.delete( `/api/product/${id}` ).then(res => {
+          this.setState({
+            inventoryList : res.data,
+          });
+        });
+    }
 
     render() {
         const prodList = this.state.inventoryList.map((product, index) => (
-           <Product product={product} key={index} />))
+           <Product product={product} key={index} deleteProduct={this.deleteProduct()} />))
         
             return(
 

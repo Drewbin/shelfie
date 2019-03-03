@@ -39,7 +39,7 @@ export default class Form extends Component {
             image,
             price,
         }).then( () => {
-            this.props.history.push('/')
+            this.props.history.push('/inventory')
             this.clearInput();
         })
     }

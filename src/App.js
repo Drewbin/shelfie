@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch, Redirect, HashRouter as Router } from 'react-router-dom';
+import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 
 import Dashboard from './components/Dashboard/Dashboard';
 import Form from './components/Form/Form';
 import Header from './components/Header/Header';
-import axios from 'axios';
+//import axios from 'axios';
 
 class App extends Component {
 
@@ -14,8 +14,10 @@ class App extends Component {
 
   render() {
     return (
+      
       <Router>
         <div className="App">
+        <Header />
           <Switch>
             <Route path="/" exact component={Dashboard} />
             <Route path='/add' component={Form} />

@@ -27,13 +27,26 @@ module.exports = {
         const dbInstance = req.db;
         const { params } = req;
 
-        dbInstance.read_product(params.id).then ( (product) => {
+        dbInstance.read_product(params.id).then( (product) => {
             res.status(200).send(product)
         }).catch(err => {
             res.status(500).send('Faled to find product.');
             console.error(err)
         })
-    }
+    },
+
+    delete: (req, res) => {
+        const dbInstance = req.db;
+        const { params } = req;
+
+        dbInstance.delete_product(params.id).then( () => {
+            res.status(200).send('Deleted product.')
+        }).catch(err => {
+            res.status(500).send('Failed to delete product.')
+            console.error
+        })
+    },
+
 
 
 }

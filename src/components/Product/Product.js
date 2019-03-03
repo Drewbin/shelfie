@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 export default class Product extends Component {
     render() {
-        const { /*id,*/ name, image, price } = this.props.product;
+        const { name, image, price } = this.props.product;
+        const deleteProduct = this.props.deleteProduct;
 
         return (
             <form>
@@ -12,6 +13,8 @@ export default class Product extends Component {
                 </h3>
                 <img src={image} alt={name}/>
                 <p>Price: {'$' + price} </p>
+                <button onClick={this.props.deleteProduct}>Delete</button>
+                <button>Edit</button>
             </form>
         )
     }
