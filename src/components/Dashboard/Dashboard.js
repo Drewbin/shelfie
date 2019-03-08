@@ -10,9 +10,14 @@ export default class Dashboard extends Component {
         this.state={
           inventoryList: [],
         }
-      }
 
-    componentDidMount() {
+      this.deleteProduct = this.deleteProduct.bind(this);
+      this.editProduct = this.editProduct.bind(this);
+      
+    }
+    
+
+    showInventory() {
         axios.get('/api/inventory').then(res => {
           this.setState({
             inventoryList : res.data,
@@ -22,30 +27,27 @@ export default class Dashboard extends Component {
 
     deleteProduct(id){
         axios.delete( `/api/product/${id}` ).then(res => {
-          this.setState({
-            inventoryList : res.data,
+          this.showInventory();
           });
-        });
+    }
+
+    componentDidMount(){
+      this.showInventory();
+    }
+
+    editProduct(id) {
+      console.log(id)
+      this.props.history.push(`/api/edit/${id}`)
     }
 
     render() {
         const prodList = this.state.inventoryList.map((product, index) => (
-           <Product product={product} key={index} deleteProduct={this.deleteProduct()} />))
+           <Product product={product} key={index} deleteProduct={this.deleteProduct} editProduct={this.editProduct} />))
         
             return(
 
-                prodList
+              prodList
 
             )
     }
 }
-
-
-// <div key={index}>
-    // <p></p>
-    // {product.name}
-    // <p></p>
-    // {product.image}
-    // <p></p>
-    // {product.price}
-//</div>

@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 app.use(useDb());
 
 app.get('/api/inventory', productsController.getAll );
-app.get('/api/product/:id', productsController.getOne);
+app.get('/api/edit/:id', productsController.getOne);
 app.post('/api/product', productsController.create );
 app.delete('/api/product/:id', productsController.delete);
 

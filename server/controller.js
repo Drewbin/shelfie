@@ -16,6 +16,7 @@ module.exports = {
         const { name, image, price } = req.body
         
         dbInstance.create_product([ name, image, price ]).then( () => {
+            console.log('created')
             res.status(200).send('Product added.')
         }).catch(err => {
             res.status(500).send('Failed to create item.')
@@ -28,9 +29,9 @@ module.exports = {
         const { params } = req;
 
         dbInstance.read_product(params.id).then( (product) => {
-            res.status(200).send(product)
+            res.status(200).send(product[0])
         }).catch(err => {
-            res.status(500).send('Faled to find product.');
+            res.status(500).send('Failed to find product.');
             console.error(err)
         })
     },
@@ -40,10 +41,10 @@ module.exports = {
         const { params } = req;
 
         dbInstance.delete_product(params.id).then( () => {
-            res.status(200).send('Deleted product.')
+            res.status(200).send('Deleted product')
         }).catch(err => {
             res.status(500).send('Failed to delete product.')
-            console.error
+            console.error(err)
         })
     },
 

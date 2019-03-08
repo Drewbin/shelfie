@@ -9,9 +9,6 @@ import Header from './components/Header/Header';
 
 class App extends Component {
 
-
-
-
   render() {
     return (
       
@@ -21,7 +18,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Dashboard} />
             <Route path='/add' component={Form} />
-            <Route path='/edit/:id' component={Form} />
+            <Route path='/api/edit/:id' component={Form} />
           </Switch>
         </div>
       </Router>
