@@ -90,7 +90,7 @@ export default class Form extends Component {
 
                     <button 
                         onClick={(event) => this.addItem(event)}
-                        type='submit' >Add to Inventory </button>
+                        type='submit' > Add to Inventory </button>
                     
                     <button 
                         onClick={() => this.clearInput}
