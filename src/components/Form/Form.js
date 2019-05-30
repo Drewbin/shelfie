@@ -47,8 +47,24 @@ export default class Form extends Component {
         })
     };
 
+    editItem = (event) => {
+        event.preventDefault();
+
+        const { id, name, image, price } = this.state;
+
+        axios.put(`/api/product/${id}`, {
+            id,
+            name,
+            image,
+            price,
+        }).then( () => {
+            this.props.history.push('/');
+            this.clearInput();
+        })
+    }
+
     loadProduct = (id) => {
-        axios.get( `/api/edit/${id}` ).then(res => {
+        axios.get( `/api/product/${id}` ).then(res => {
             console.log(res)
           this.setState({
               id: res.data.id,

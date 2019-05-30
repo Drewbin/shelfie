@@ -24,6 +24,19 @@ module.exports = {
         })
     },
 
+    edit: (req, res) => {
+        const dbInstance = req.db;
+        const { name, image, price } = req.body;
+
+        dbInstance.edit_product([ name, image, price ]).then( () => {
+            console.log('edited')
+            res.status(200).send('Product edited')
+        }).catch(err => {
+            res.status(200).send('Failed to edit item.')
+            console.error(err);
+        })
+    }
+
     getOne: (req, res) => {
         const dbInstance = req.db;
         const { params } = req;
